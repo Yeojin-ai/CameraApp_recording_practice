@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 
 import com.example.example_recording_v4.databinding.ActivityMainBinding;
 
@@ -25,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "IrisVideoRecord";
 
     ActivityMainBinding binding;
+
+    //Fragment
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    VideoFragment videoFragment;
+    Camera2BasicFragment camera2BasicFragment;
 
     private static final int CALL_VIDEO_CAM = 0;
     private static final int PERMISSIONS_NUM = 100;
@@ -42,11 +52,21 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             checkPermission();
         }
+
+        //fragment init
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
         if (null == savedInstanceState){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2BasicFragment.newInstance()).commit();
+            fragmentTransaction.add(R.id.container, Camera2BasicFragment.newInstance()).commit();
         }
-        //binding.callCameraBtn.setOnClickListener(view -> callVideoCam());
+
+        //mbinding.callCameraBtn.setOnClickListener(view -> callVideoCam());
+    }
+
+    public void replaceFragment(Fragment fragment){
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container,fragment).commit();
     }
 
     private void callVideoCam(){

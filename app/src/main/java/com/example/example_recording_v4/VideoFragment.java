@@ -48,7 +48,11 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class VideoFragment extends Fragment implements View.OnClickListener {
 
@@ -81,7 +85,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
 
     private String mNextVideoAbsolutePath;
     private boolean mIsRecordingVideo;
-    CompositeDisposable mCompositeDisposable; //for timer- dependency add: io.reactivex.rxjava2...
+    CompositeDisposable mCompositeDisposable; //for timer--dependency add: io.reactivex.rxjava2...
 
     public static VideoFragment newInstance(){
         return new VideoFragment();
@@ -101,6 +105,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         binding.pictureBtn.setOnClickListener(this);
         binding.switchImgBtn.setOnClickListener(this);
+        binding.modeBtn.setOnClickListener(this);
     }
 
     @Override
@@ -462,7 +467,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
                     }
                 }
             },mBackgroundHandler);
-            //timer();
+            timer();
         }catch (CameraAccessException | IOException e){
             e.printStackTrace();
         }
@@ -483,7 +488,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
             getActivity().getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
         }
         mNextVideoAbsolutePath = null;
-        //stop();
+        stop();
         startPreview();
     }
     //CHANGE CAMERA LENSE
@@ -508,6 +513,9 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
                 closeCamera();
                 openCamera(binding.preview.getWidth(),binding.preview.getHeight(),mCameraFacing);
                 break;
+            case R.id.modeBtn:
+                ((MainActivity)getActivity()).replaceFragment(Camera2BasicFragment.newInstance());
+                break;
         }
     }
     static class CompareSizeByArea implements Comparator<Size>{
@@ -517,16 +525,40 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    /*
+
     //========== TIME COUNT ==========//
     private void timer(){
         binding.recordTimeTxtView.setVisibility(View.VISIBLE);
         Log.e(TAG,"Timer start");
         Observable<Long> duration = Observable.interval(1, TimeUnit.SECONDS)
                 .map(sec -> sec += 1);
+        Disposable disposable = duration.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(timeout -> {
+                    long min = timeout/60;
+                    long sec = timeout % 60;
+                    String sMin;
+                    String sSec;
+                    if (min<10) sMin = "0" + min;
+                    else sMin = String.valueOf(min);
+
+                    if (sec<10) sSec = "0" + sec;
+                    else sSec = String.valueOf(sec);
+
+                    String elapseTime = sMin + ":" + sSec;
+                    binding.recordTimeTxtView.setText(elapseTime);
+                });
+        mCompositeDisposable.add(disposable);
     }
 
-     */
+    private void stop(){
+        binding.recordTimeTxtView.setVisibility(View.GONE);
+        if(!mCompositeDisposable.isDisposed()){
+            mCompositeDisposable.dispose();
+        }
+    }
+
+
 
     @Override
     public void onDestroyView() {

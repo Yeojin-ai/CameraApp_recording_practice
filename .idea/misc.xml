@@ -6,11 +6,11 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/drawable/ic_action_info.xml" value="0.2015" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1565" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/drawable/icon_record.xml" value="0.2015" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/activity_video.xml" value="0.1573321932449765" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/fragment_camera2_basic.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/fragment_camera2_basic.xml" value="0.16" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/fragment_camera2_video.xml" value="0.16" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/fragment_video.xml" value="0.18" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Example_recording_v4/app/src/main/res/layout/fragment_video.xml" value="0.1" />
       </map>
     </option>
   </component>

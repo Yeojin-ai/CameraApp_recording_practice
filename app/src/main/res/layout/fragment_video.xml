@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <!-- 가로 -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ll_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.example.example_recording_v4.VideoRecordingView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/control"
             android:id="@+id/preview"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/control"
             android:layout_width="match_parent"
-            android:layout_height="112dp"
-            android:background="@color/design_default_color_background"
+            android:layout_height="178dp"
+            android:background="#9FF6EE"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
@@ -39,17 +37,27 @@
                 android:padding="20dp"
                 android:src="@drawable/ic_action_info"/>
 
+            <Button
+                android:id="@+id/modeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mode"
+                android:backgroundTint="@color/black"
+                android:layout_gravity="center_vertical|left"
+                android:layout_margin="10dp"/>
+
         </FrameLayout>
+
         <TextView
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="8dp"
-            android:drawableStart="@drawable/icon_record"
             android:id="@+id/recordTimeTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_record"
+            android:padding="8dp"
             android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -60,6 +60,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
     public static Camera2BasicFragment newInstance() {
         return new Camera2BasicFragment();
     }
+    private static final String TAG = "Camera2BasicFragment";
 
     private static final String CAMERA_FRONT = "1";
     private static final String CAMERA_REAR = "0";
@@ -74,8 +75,6 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
-
-    private static final String TAG = "Camera2BasicFragment";
 
     /*Camera state: Showing camera preview*/
     private static final int STATE_PREVIEW = 0;
@@ -114,6 +113,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
 
     /* CAMERA */
     private  String mCameraId;
+    private int mCameraFacing;
     private VideoRecordingView mTextureView;
     private CameraCaptureSession mCaptureSession;
     private CameraDevice mCameraDevice;
@@ -271,6 +271,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
     public void onViewCreated(@NonNull final View view, Bundle savedInstanceState) {
         view.findViewById(R.id.pictureBtn).setOnClickListener(this);
         view.findViewById(R.id.switchImgBtn).setOnClickListener(this);
+        view.findViewById(R.id.modeBtn).setOnClickListener(this);
         mTextureView = view.findViewById(R.id.texture);
     }
 
@@ -759,8 +760,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
                 takePicture();
                 break;
             }
-            case R.id.info: {
-
+            case R.id.switchImgBtn: {
                 Activity activity = getActivity();
                 if (null != activity) {
                     new AlertDialog.Builder(activity)
@@ -768,6 +768,10 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
                             .setPositiveButton(android.R.string.ok, null)
                             .show();
                 }
+                break;
+            }
+            case R.id.modeBtn:{
+                ((MainActivity)getActivity()).replaceFragment(VideoFragment.newInstance());
                 break;
             }
         }
