@@ -17,7 +17,7 @@
             android:id="@+id/control"
             android:layout_width="match_parent"
             android:layout_height="178dp"
-            android:background="#9FF6EE"
+            android:background="#2196F3"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
@@ -30,18 +30,18 @@
             <ImageButton
                 android:id="@+id/switchImgBtn"
                 style="@android:style/Widget.Material.Light.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="118dp"
+                android:layout_height="105dp"
                 android:layout_gravity="center_vertical|right"
                 android:contentDescription="description_info"
                 android:padding="20dp"
-                android:src="@drawable/ic_action_info"/>
+                android:src="@drawable/ic_action_name" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/modeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mode"
+                android:src="@mipmap/ic_camera"
                 android:backgroundTint="@color/black"
                 android:layout_gravity="center_vertical|left"
                 android:layout_margin="10dp"/>

@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     //Fragment
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    VideoFragment videoFragment;
-    Camera2BasicFragment camera2BasicFragment;
 
     private static final int CALL_VIDEO_CAM = 0;
     private static final int PERMISSIONS_NUM = 100;
